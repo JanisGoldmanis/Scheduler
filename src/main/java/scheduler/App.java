@@ -21,20 +21,23 @@ public class App {
 
         SolverFactory<ElementSchedule> solverFactory = SolverFactory.create(SolverConfig.createFromXmlResource("scheduler/solverConfig.xml"));
 
-        ElementSchedule problem = generateData();
+        String elementsInputPath = "/Users/Janis/IdeaProjects/Scheduler/src/main/resources/inputs/Places1.csv";
+        String placesInputPath = "/Users/Janis/IdeaProjects/Scheduler/src/main/resources/inputs/Elements1.csv";
+
+        ElementSchedule problem = generateData(elementsInputPath, placesInputPath);
 
         Solver<ElementSchedule> solver = solverFactory.buildSolver();
         ElementSchedule solution = solver.solve(problem);
 
         printSchedule(solution);
     }
-    public static ElementSchedule generateData() {
+    public static ElementSchedule generateData(String elementsInputPath, String placesInputPath) {
         List<Shift> shiftList = Shift.generate_shifts();
 
 
         List<Place> placeList = new LinkedList<>();
         ReadCSV readCSV = new ReadCSV();
-        String[][] placeData = readCSV.read("/Users/Janis/IdeaProjects/Scheduler/src/main/resources/inputs/Places1.csv");
+        String[][] placeData = readCSV.read(elementsInputPath);
         for(int i=1;i<placeData.length;i++){
             String placeName = placeData[i][0];
             Integer maxNumberOfWorkers = Integer.parseInt(placeData[i][1]);
@@ -44,7 +47,7 @@ public class App {
 
         List<Element> elementList = new LinkedList<>();
         ReadCSV readCSV2 = new ReadCSV();
-        String[][] elementData = readCSV2.read("/Users/Janis/IdeaProjects/Scheduler/src/main/resources/inputs/Elements1.csv");
+        String[][] elementData = readCSV2.read(placesInputPath);
         for(int i=1;i<elementData.length;i++){
             String deliveryNumber = elementData[i][0];
             Float manHours = Float.parseFloat(elementData[i][1]);
