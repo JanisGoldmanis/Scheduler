@@ -3,6 +3,8 @@ package scheduler.domain;
 import org.optaplanner.core.api.domain.entity.PlanningEntity;
 import org.optaplanner.core.api.domain.variable.PlanningVariable;
 
+import java.util.Queue;
+
 @PlanningEntity
 public class Assembly {
     private Element element;
@@ -11,18 +13,21 @@ public class Assembly {
     @PlanningVariable(valueRangeProviderRefs = "places")
     private Place place;
 
+    @PlanningVariable(valueRangeProviderRefs = "queue")
+    private PlaceInQueue queue;
+
 
 
 
     public Assembly(){}
 
 
-    public Assembly(Element element, Shift shift, Place place){
-//        setWorkers(workers);
+    public Assembly(Element element, Shift shift, Place place, PlaceInQueue queue){
         setElement(element);
         setTimeSlot(shift);
         setPlace(place);
-//        setID(id);
+        setQueue(queue);
+
     }
 
 
@@ -58,11 +63,11 @@ public class Assembly {
         this.place = place;
     }
 
-//    public String getID() {
-//        return id;
-//    }
-//
-//    public void setID(String ID) {
-//        this.id = ID;
-//    }
+    public PlaceInQueue getQueue() {
+        return queue;
+    }
+
+    public void setQueue(PlaceInQueue queue) {
+        this.queue = queue;
+    }
 }

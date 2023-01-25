@@ -1,19 +1,22 @@
 package scheduler.domain;
 
 
-import org.optaplanner.core.api.domain.entity.PlanningEntity;
+import java.util.ArrayList;
 
 
 public class Element {
     private String deliveryNumber;
-    private Float manHours;
+    private ArrayList<Float> manHours;
+    private Float totalManHours;
 
     public Element(){}
 
 
-    public Element(String deliveryNumber, Float manHours){
+    public Element(String deliveryNumber, ArrayList<Float> manHours){
         setDeliveryNumber(deliveryNumber);
         setManHours(manHours);
+        setTotalManHours(generateTotalManHours(manHours));
+
     }
 
 
@@ -26,11 +29,27 @@ public class Element {
         this.deliveryNumber = deliveryNumber;
     }
 
-    public Float getManHours() {
+    public ArrayList<Float> getManHours() {
         return manHours;
     }
 
-    public void setManHours(Float manHours) {
+    public void setManHours(ArrayList<Float> manHours) {
         this.manHours = manHours;
+    }
+
+    public Float generateTotalManHours(ArrayList<Float> manHours){
+        Float totalManHours = (float) 0;
+        for (Float manHour : manHours) {
+            totalManHours += manHour;
+        }
+        return totalManHours;
+    }
+
+    public Float getTotalManHours() {
+        return totalManHours;
+    }
+
+    public void setTotalManHours(Float totalManHours) {
+        this.totalManHours = totalManHours;
     }
 }

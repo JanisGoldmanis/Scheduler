@@ -12,14 +12,14 @@ public class ElementSchedulerEasyScoreCalculator implements EasyScoreCalculator<
         // Check if sufficient manpower each day
         // Adding softScore if elements pushed to later days
         for (Place place : elementSchedule.getPlaceList()){
-            Integer day = 0;
+            int day = 0;
             for (Shift shift : elementSchedule.getShiftList()){
-                Integer availableManpower = place.getMaxManHours();
+                int availableManpower = place.getMaxManHours();
                 Float spentManpower = (float) 0;
                 for (Assembly assembly : elementSchedule.getAssemblyList()){
                     if (assembly.getShift() != null && assembly.getPlace() != null){
                         if (assembly.getPlace() == place && assembly.getShift() == shift){
-                            spentManpower += assembly.getElement().getManHours();
+                            spentManpower += assembly.getElement().getTotalManHours();
                             softScore-= day;
                         }
                     }
@@ -30,6 +30,23 @@ public class ElementSchedulerEasyScoreCalculator implements EasyScoreCalculator<
                 day++;
             }
         }
+        // Checking if each queue spot is used once
+        for (PlaceInQueue queue : elementSchedule.getQueueList()){
+            int count = 0;
+            for (Assembly assembly : elementSchedule.getAssemblyList()){
+                if (assembly.getQueue() == queue){
+                    count++;
+                }
+            }
+            if (count > 1){
+                hardScore--;
+            }
+        }
+
+
+
+
+
         return HardSoftScore.of(hardScore, softScore);
     }
 }

@@ -20,6 +20,9 @@ public class ElementSchedule {
     @ValueRangeProvider(id = "shifts")
     @ProblemFactCollectionProperty
     private List<Shift> shiftList;
+    @ValueRangeProvider(id = "queue")
+    @ProblemFactCollectionProperty
+    private List<PlaceInQueue> queueList;
     @ProblemFactCollectionProperty
     private List<Worker> workerList;
     @ProblemFactCollectionProperty
@@ -34,6 +37,7 @@ public class ElementSchedule {
         setShiftList(new LinkedList<>());
         setWorkerList(new LinkedList<>());
         setElementList(new LinkedList<>());
+        setQueueList(new LinkedList<>());
     }
 
 
@@ -84,5 +88,13 @@ public class ElementSchedule {
 
     public void setScore(HardSoftScore score) {
         this.score = score;
+    }
+
+    public List<PlaceInQueue> getQueueList() {
+        return queueList;
+    }
+
+    public void setQueueList(List<PlaceInQueue> queueList) {
+        this.queueList = queueList;
     }
 }
