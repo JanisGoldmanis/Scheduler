@@ -21,9 +21,10 @@ public class App {
 
         SolverFactory<ElementSchedule> solverFactory = SolverFactory.create(SolverConfig.createFromXmlResource("scheduler/solverConfig.xml"));
 
-        String elementsInputPath = "/Users/Janis/IdeaProjects/Scheduler/src/main/resources/inputs/Places1.csv";
-        String placesInputPath = "/Users/Janis/IdeaProjects/Scheduler/src/main/resources/inputs/Elements1.csv";
-
+        //String elementsInputPath = "/Users/Janis/IdeaProjects/Scheduler/src/main/resources/inputs/Places1.csv";
+        String elementsInputPath = "/Users/janis.goldmanis/IdeaProjects/Scheduler/src/main/resources/inputs/Places1.csv";
+        //String placesInputPath = "/Users/Janis/IdeaProjects/Scheduler/src/main/resources/inputs/Elements1.csv";
+        String placesInputPath = "/Users/janis.goldmanis/IdeaProjects/Scheduler/src/main/resources/inputs/Elements1.csv";
         ElementSchedule problem = generateData(elementsInputPath, placesInputPath);
 
         Solver<ElementSchedule> solver = solverFactory.buildSolver();

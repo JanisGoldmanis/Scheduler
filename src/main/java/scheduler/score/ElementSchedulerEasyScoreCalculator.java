@@ -10,7 +10,7 @@ public class ElementSchedulerEasyScoreCalculator implements EasyScoreCalculator<
         int hardScore = 0, softScore = 0;
 
         // Check if sufficient manpower each day
-        // Adding softScore if elements pushed to layer days
+        // Adding softScore if elements pushed to later days
         for (Place place : elementSchedule.getPlaceList()){
             Integer day = 0;
             for (Shift shift : elementSchedule.getShiftList()){
